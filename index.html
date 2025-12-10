@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sana Bir Şey Yapmış Olabilirim...</title>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin: 0;
@@ -14,32 +15,25 @@ body {
   overflow-x: hidden;
 }
 
-/* Genel buton stili */
+.section { display: none; padding: 60px 20px; }
+.active { display: block; }
+
+/* Buton */
 .btn {
-  display: inline-block;
   padding: 12px 28px;
   background: #ff7bbf;
   color: white;
   border-radius: 30px;
-  margin-top: 25px;
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
   font-weight: 600;
+  margin-top: 25px;
   transition: .3s;
 }
-.btn:hover {
-  background: #ff92cc;
-  transform: scale(1.05);
-}
+.btn:hover { transform: scale(1.05); background: #ff92cc; }
 
-/* Sayfa (bölüm) görünürlüğü */
-.section {
-  display: none;
-  padding: 60px 20px;
-}
-.active { display: block; }
-
-/* Başlangıç yazıları */
+/* Intro yazıları */
 .start-text {
   font-size: 1.5rem;
   text-align: center;
@@ -49,36 +43,48 @@ body {
 }
 @keyframes fadeIn { to { opacity: 1; } }
 
+/* Aşağı ok */
+.down-arrow {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-top: 60px;
+  opacity: 0.7;
+  animation: arrowBounce 1.6s infinite;
+  color: #ff7bbf;
+}
+@keyframes arrowBounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+  100% { transform: translateY(0); }
+}
+
 /* Scroll bölümü */
 .scroll-section {
   max-width: 800px;
   margin: 0 auto;
-  line-height: 1.8;
-  color: #444;
   font-size: 1.15rem;
+  line-height: 1.8;
 }
 .scroll-section h2 {
   margin-top: 60px;
   color: #ff4fa3;
-  font-size: 1.7rem;
+  font-size: 1.65rem;
 }
 
-/* Kalp efektleri */
+/* Kalpler */
 .heart-bg {
   position: fixed;
-  top: 0; left: 0;
   width: 100%; height: 100%;
-  pointer-events: none;
-  overflow: hidden;
+  top: 0; left: 0;
   z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
 }
-
-/* Küçük yavaş hareket eden kalpler */
 .heart {
   position: absolute;
-  color: #ff91c8;
   font-size: 18px;
-  animation: floatUp 8s linear infinite;
+  color: #ff91c8;
+  animation: floatUp 7s linear infinite;
   opacity: 0.7;
 }
 @keyframes floatUp {
@@ -86,12 +92,11 @@ body {
   100% { transform: translateY(-800px) scale(1.6); opacity: 0; }
 }
 
-/* Beni seviyor musun kısmı */
+/* Love ekranı */
 .love-container {
   text-align: center;
   margin-top: 100px;
 }
-
 button {
   padding: 12px 25px;
   border: none;
@@ -111,18 +116,14 @@ button:hover { background: #ff92cc; }
   display: none;
   font-weight: 600;
 }
-
 </style>
 </head>
+
 <body>
 
-<!-- Arka plan kalpler -->
 <div class="heart-bg" id="heartBg"></div>
 
-<!-- ===================== -->
-<!--   1. BÖLÜM — INTRO    -->
-<!-- ===================== -->
-
+<!-- INTRO -->
 <div id="intro" class="section active">
   <div class="start-text" style="animation-delay:0s;">Gerçekten sana normal bir anahtarlık vereceğimi mi sandın?</div>
   <div class="start-text" style="animation-delay:2s;">Bu... ne zaman beni özlersen açıp<br> sana olan sevgimi hatırlayacağın küçük bir yer.</div>
@@ -131,76 +132,54 @@ button:hover { background: #ff92cc; }
   <div style="text-align:center; margin-top:40px;">
     <span class="btn" onclick="go(2)">Evet</span>
   </div>
+
+  <div class="down-arrow">↓</div>
 </div>
 
 
-
-<!-- ================================ -->
-<!--  2. BÖLÜM — UZUN SCROLL SAYFASI  -->
-<!-- ================================ -->
-
+<!-- SCROLL SAYFASI -->
 <div id="scroll" class="section">
   <div class="scroll-section">
-
-    <h2>• Başlamadan Önce</h2>
-    <p>
-      Bu sayfayı yaparken düşündüğüm tek şey vardı:  
-      <strong>“Seni anlatırken güzel olsun, tatlı olsun, içten olsun.”</strong>  
-      Çünkü bazı şeyler vardır… yazınca daha başka durur.  
-      Buraya yazdıklarım da tam öyle şeyler.
-    </p>
 
     <h2>• Seni İlk Tanıdığım Zaman</h2>
     <p>
       Hayat bazen çok garip şekillerde sürpriz yapıyor insana.  
       O zamanlar hiçbir şey beklemiyordum… ama bir anda sen çıktın karşıma.  
       Bazen biriyle konuşmaya başlarsın ve fark etmeden kendini daha çok konuşurken bulursun ya…   
-      İşte öyle oldu.  
-      Ne ara alıştım sana, bilmiyorum.  
+      işte öyle oldu. Ne ara alıştım sana, gerçekten bilmiyorum.
     </p>
 
     <h2>• Senin Hakkında En Sevdiğim Şeyler</h2>
     <p>
-      Senin gerçekten en sevdiğim şey…  
-      Ne yaptığın, ne söylediğin ya da nasıl göründüğün değil.  
-      <strong>Bende bıraktığın his.</strong><br><br>
-      Böyle… içini rahatlatan, huzurlu bir his var sende.  
-      İnsan yorulunca, sıkılınca, düşününce… bir tek sesini duysa yetermiş gibi.  
-      Sen fark etmezsin ama, o his çok değerli.
+      En sevdiğim şey dış görünüşün değil, karakterin değil…  
+      <strong>bende bıraktığın his.</strong><br><br>
+      Birini görünce içinin hafiflemesi diye bir şey var ya…  
+      sende olan tam olarak o.
     </p>
 
     <h2>• Seni Sevme Şeklim</h2>
     <p>
       Bazen bir şey anlatıyorsun, dalıyorum…  
-      Çünkü mimiklerini izlemek bile ayrı güzel.  
-      Bazen bir şeye sinirleniyorsun, yine tatlı geliyorsun bana (evet, kabul ediyorum).  
-      Bazen de sadece var oluyorsun… ve bu bile yetiyor.<br><br>
-      Seninle konuşmak, kavga etmek, gülmek, saçmalamak…  
-      Hepsi ayrı güzel.  
+      çünkü mimiklerini izlemek bile ayrı güzel.  
+      Bazen bir şeye sinirleniyorsun, yine tatlı geliyorsun.  
+      Bazen de sadece var oluyorsun… ve bu bile yetiyor.
     </p>
 
     <h2>• Söyleyemediğim Şeyler</h2>
     <p>
-      Bazı duygular vardır… söylemesi zordur.  
-      Çünkü söylerken tam oturmaz ama yazınca çok güzel durur.  
+      Bazı cümleler var, yüksek sesle söylenince tam olmuyor ama yazınca çok güzel duruyor.  
       Mesela:  
-      <strong>“Bazen seni düşündüğümde istemsizce gülümsüyorum.”</strong>  
-      Bu cümleyi yüksek sesle söyleyemezdim belki ama buraya yazmak doğru hissettirdi.  
+      <strong>“Seni düşündüğümde istemsizce gülümsüyorum.”</strong>
     </p>
 
     <h2>• Bir Şey Daha</h2>
     <p>
-      Eğer bir gün kötü hissedersen, yorulursan, kafan karışırsa, moralin bozulursa…  
-      Bu siteyi aç.  
-      Okudukların seni biraz bile olsa sararsa, içini ısıtırsa…  
-      Ben amacına ulaşmışım demektir.
+      Eğer bir gün kötü hissedersen, yorulursan, kafan karışırsa…  
+      burayı aç. Okudukların seni biraz bile sararsa… amacına ulaşmışım demektir.
     </p>
 
     <h2>• Hazırsan…</h2>
-    <p>
-      Şimdi sana küçük bir şey soracağım.  
-      Bence cevabı zaten belli ama olsun… yine de sorayım.
-    </p>
+    <p>Şimdi sana küçük bir şey soracağım.</p>
 
     <div style="text-align:center;">
       <span class="btn" onclick="go(3)">Devam et 💗</span>
@@ -210,11 +189,7 @@ button:hover { background: #ff92cc; }
 </div>
 
 
-
-<!-- ========================================== -->
-<!-- 3. BÖLÜM — BENİ SEVİYOR MUSUN ETKİLEŞİMİ    -->
-<!-- ========================================== -->
-
+<!-- LOVE SAYFASI -->
 <div id="love" class="section">
   <div class="love-container">
     <h2>Beni seviyor musun?</h2>
@@ -222,37 +197,31 @@ button:hover { background: #ff92cc; }
     <button onclick="yes()">Evet</button>
     <button id="noBtn" onmouseover="escapeBtn()">Hayır</button>
 
-    <div id="msg">Ben de seni seviyorum.  
-      <br><br>  
-      Zaten biliyordum.
-    </div>
+    <div id="msg">Ben de seni seviyorum canım aşkım benim. 💗</div>
   </div>
 </div>
 
 
 
 <script>
-// Sayfa geçişi
+// Bölüm değişimi
 function go(n) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(
-    n === 2 ? 'scroll' : n === 3 ? 'love' : 'intro'
-  ).classList.add('active');
+  document.getElementById(n === 2 ? 'scroll' : n === 3 ? 'love' : 'intro').classList.add('active');
 }
 
-// Hayır kaçar
+// Hayır kaçsın
 function escapeBtn() {
   const btn = document.getElementById("noBtn");
-  btn.style.transform = "translate(" + (Math.random()*300-150) + "px, " 
-    + (Math.random()*300-150) + "px)";
+  btn.style.transform = "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
 }
 
-// Evet tıklandı
+// Evet
 function yes() {
   document.getElementById("msg").style.display = "block";
 }
 
-// Arka planda kalpler oluşturma
+// Kalpler
 function createHearts(){
   const bg = document.getElementById("heartBg");
   for(let i=0; i<25; i++){
@@ -260,7 +229,7 @@ function createHearts(){
     h.classList.add("heart");
     h.innerHTML = "❤️";
     h.style.left = Math.random()*100 + "%";
-    h.style.animationDelay = (Math.random()*8)+"s";
+    h.style.animationDelay = (Math.random()*7)+"s";
     bg.appendChild(h);
   }
 }
