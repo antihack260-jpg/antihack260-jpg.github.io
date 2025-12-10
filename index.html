@@ -1,121 +1,270 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Güllüm İçin</title>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet" />
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sana Bir Şey Yapmış Olabilirim...</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin: 0;
-    padding: 0;
-    background: #000;
-    color: #fff;
-    font-family: "Quicksand", sans-serif;
-    overflow-x: hidden;
-  }
-
-  .page {
-    display: none;
-    padding: 40px 20px;
-    text-align: center;
-    min-height: 100vh;
-  }
-
-  .active {
-    display: block;
-  }
-
-  h1, h2 {
-    margin-bottom: 15px;
-  }
-
-  p {
-    opacity: 0.85;
-    line-height: 1.7;
-  }
-
-  .btn {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 12px 28px;
-    background: #ff4f8b;
-    color: #fff;
-    border-radius: 25px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  .btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #ff4f8b;
-  }
-
-  button {
-    padding: 12px 25px;
-    margin: 10px;
-    border: none;
-    border-radius: 20px;
-    background: #ff4f8b;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  #msg { 
-    margin-top: 30px; 
-    font-size: 1.3rem;
-    display: none;
-  }
-</style>
-</head>
-
-<body>
-
-<!-- SAYFA 1 -->
-<div id="page1" class="page active">
-  <h1>Hoş geldin güzelim</h1>
-  <p>Böyle küçük şeylere gülümseyişini seviyorum güllüm.</p>
-  <div class="btn" onclick="go(2)">Devam et 💗</div>
-</div>
-
-<!-- SAYFA 2 -->
-<div id="page2" class="page">
-  <h2>Bir şey söylemek istiyorum</h2>
-  <p>
-    Sana bazen söyleyemediklerimi buraya yazmak istedim güllüm.<br><br>
-    Bazı şeyler var ya… yüzüne söyleyince tam oturmuyor ama böyle yazınca daha güzel duruyor.<br><br>
-    Seninle konuşmak kolay ama bazı duygular var ki yazınca daha tam yerine oturuyor.
-  </p>
-  <div class="btn" onclick="go(3)">Bir şey daha 😏</div>
-</div>
-
-<!-- SAYFA 3 -->
-<div id="page3" class="page">
-  <h2>Beni seviyor musun?</h2>
-
-  <button onclick="yes()">Evet</button>
-  <button id="noBtn" onmouseover="escapeBtn()">Hayır</button>
-
-  <div id="msg">Ben de seni seviyorum güllüm 😍</div>
-</div>
-
-<script>
-function go(n) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById("page" + n).classList.add("active");
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #ffeef7;
+  color: #333;
+  overflow-x: hidden;
 }
 
+/* Genel buton stili */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #ff7bbf;
+  color: white;
+  border-radius: 30px;
+  margin-top: 25px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+  transition: .3s;
+}
+.btn:hover {
+  background: #ff92cc;
+  transform: scale(1.05);
+}
+
+/* Sayfa (bölüm) görünürlüğü */
+.section {
+  display: none;
+  padding: 60px 20px;
+}
+.active { display: block; }
+
+/* Başlangıç yazıları */
+.start-text {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 120px 20px 40px;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* Scroll bölümü */
+.scroll-section {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+  color: #444;
+  font-size: 1.15rem;
+}
+.scroll-section h2 {
+  margin-top: 60px;
+  color: #ff4fa3;
+  font-size: 1.7rem;
+}
+
+/* Kalp efektleri */
+.heart-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* Küçük yavaş hareket eden kalpler */
+.heart {
+  position: absolute;
+  color: #ff91c8;
+  font-size: 18px;
+  animation: floatUp 8s linear infinite;
+  opacity: 0.7;
+}
+@keyframes floatUp {
+  0% { transform: translateY(80px) scale(1); opacity: .6; }
+  100% { transform: translateY(-800px) scale(1.6); opacity: 0; }
+}
+
+/* Beni seviyor musun kısmı */
+.love-container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 20px;
+  background: #ff7bbf;
+  color: white;
+  cursor: pointer;
+  margin: 10px;
+  font-size: 1rem;
+}
+button:hover { background: #ff92cc; }
+
+#msg {
+  margin-top: 30px;
+  font-size: 1.4rem;
+  color: #ff3f97;
+  display: none;
+  font-weight: 600;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Arka plan kalpler -->
+<div class="heart-bg" id="heartBg"></div>
+
+<!-- ===================== -->
+<!--   1. BÖLÜM — INTRO    -->
+<!-- ===================== -->
+
+<div id="intro" class="section active">
+  <div class="start-text" style="animation-delay:0s;">Gerçekten sana normal bir anahtarlık vereceğimi mi sandın?</div>
+  <div class="start-text" style="animation-delay:2s;">Bu... ne zaman beni özlersen açıp<br> sana olan sevgimi hatırlayacağın küçük bir yer.</div>
+  <div class="start-text" style="animation-delay:4s;">Bunu görmeye hazır mısın?</div>
+
+  <div style="text-align:center; margin-top:40px;">
+    <span class="btn" onclick="go(2)">Evet</span>
+  </div>
+</div>
+
+
+
+<!-- ================================ -->
+<!--  2. BÖLÜM — UZUN SCROLL SAYFASI  -->
+<!-- ================================ -->
+
+<div id="scroll" class="section">
+  <div class="scroll-section">
+
+    <h2>• Başlamadan Önce</h2>
+    <p>
+      Bu sayfayı yaparken düşündüğüm tek şey vardı:  
+      <strong>“Seni anlatırken güzel olsun, tatlı olsun, içten olsun.”</strong>  
+      Çünkü bazı şeyler vardır… yazınca daha başka durur.  
+      Buraya yazdıklarım da tam öyle şeyler.
+    </p>
+
+    <h2>• Seni İlk Tanıdığım Zaman</h2>
+    <p>
+      Hayat bazen çok garip şekillerde sürpriz yapıyor insana.  
+      O zamanlar hiçbir şey beklemiyordum… ama bir anda sen çıktın karşıma.  
+      Bazen biriyle konuşmaya başlarsın ve fark etmeden kendini daha çok konuşurken bulursun ya…   
+      İşte öyle oldu.  
+      Ne ara alıştım sana, bilmiyorum.  
+    </p>
+
+    <h2>• Senin Hakkında En Sevdiğim Şeyler</h2>
+    <p>
+      Senin gerçekten en sevdiğim şey…  
+      Ne yaptığın, ne söylediğin ya da nasıl göründüğün değil.  
+      <strong>Bende bıraktığın his.</strong><br><br>
+      Böyle… içini rahatlatan, huzurlu bir his var sende.  
+      İnsan yorulunca, sıkılınca, düşününce… bir tek sesini duysa yetermiş gibi.  
+      Sen fark etmezsin ama, o his çok değerli.
+    </p>
+
+    <h2>• Seni Sevme Şeklim</h2>
+    <p>
+      Bazen bir şey anlatıyorsun, dalıyorum…  
+      Çünkü mimiklerini izlemek bile ayrı güzel.  
+      Bazen bir şeye sinirleniyorsun, yine tatlı geliyorsun bana (evet, kabul ediyorum).  
+      Bazen de sadece var oluyorsun… ve bu bile yetiyor.<br><br>
+      Seninle konuşmak, kavga etmek, gülmek, saçmalamak…  
+      Hepsi ayrı güzel.  
+    </p>
+
+    <h2>• Söyleyemediğim Şeyler</h2>
+    <p>
+      Bazı duygular vardır… söylemesi zordur.  
+      Çünkü söylerken tam oturmaz ama yazınca çok güzel durur.  
+      Mesela:  
+      <strong>“Bazen seni düşündüğümde istemsizce gülümsüyorum.”</strong>  
+      Bu cümleyi yüksek sesle söyleyemezdim belki ama buraya yazmak doğru hissettirdi.  
+    </p>
+
+    <h2>• Bir Şey Daha</h2>
+    <p>
+      Eğer bir gün kötü hissedersen, yorulursan, kafan karışırsa, moralin bozulursa…  
+      Bu siteyi aç.  
+      Okudukların seni biraz bile olsa sararsa, içini ısıtırsa…  
+      Ben amacına ulaşmışım demektir.
+    </p>
+
+    <h2>• Hazırsan…</h2>
+    <p>
+      Şimdi sana küçük bir şey soracağım.  
+      Bence cevabı zaten belli ama olsun… yine de sorayım.
+    </p>
+
+    <div style="text-align:center;">
+      <span class="btn" onclick="go(3)">Devam et 💗</span>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ========================================== -->
+<!-- 3. BÖLÜM — BENİ SEVİYOR MUSUN ETKİLEŞİMİ    -->
+<!-- ========================================== -->
+
+<div id="love" class="section">
+  <div class="love-container">
+    <h2>Beni seviyor musun?</h2>
+
+    <button onclick="yes()">Evet</button>
+    <button id="noBtn" onmouseover="escapeBtn()">Hayır</button>
+
+    <div id="msg">Ben de seni seviyorum.  
+      <br><br>  
+      Zaten biliyordum.
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+// Sayfa geçişi
+function go(n) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(
+    n === 2 ? 'scroll' : n === 3 ? 'love' : 'intro'
+  ).classList.add('active');
+}
+
+// Hayır kaçar
+function escapeBtn() {
+  const btn = document.getElementById("noBtn");
+  btn.style.transform = "translate(" + (Math.random()*300-150) + "px, " 
+    + (Math.random()*300-150) + "px)";
+}
+
+// Evet tıklandı
 function yes() {
   document.getElementById("msg").style.display = "block";
 }
 
-function escapeBtn() {
-  const btn = document.getElementById("noBtn");
-  btn.style.transform = "translate(" + (Math.random()*200-100) + "px, " 
-    + (Math.random()*200-100) + "px)";
+// Arka planda kalpler oluşturma
+function createHearts(){
+  const bg = document.getElementById("heartBg");
+  for(let i=0; i<25; i++){
+    let h = document.createElement("div");
+    h.classList.add("heart");
+    h.innerHTML = "❤️";
+    h.style.left = Math.random()*100 + "%";
+    h.style.animationDelay = (Math.random()*8)+"s";
+    bg.appendChild(h);
+  }
 }
+createHearts();
 </script>
 
 </body>
