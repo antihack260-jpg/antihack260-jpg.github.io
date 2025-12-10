@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Güllüm İçin</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+    font-family: "Quicksand", sans-serif;
+    overflow-x: hidden;
+  }
+
+  .page {
+    display: none;
+    padding: 40px 20px;
+    text-align: center;
+    min-height: 100vh;
+  }
+
+  .active {
+    display: block;
+  }
+
+  h1, h2 {
+    margin-bottom: 15px;
+  }
+
+  p {
+    opacity: 0.85;
+    line-height: 1.7;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 28px;
+    background: #ff4f8b;
+    color: #fff;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff4f8b;
+  }
+
+  button {
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 20px;
+    background: #ff4f8b;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  #msg { 
+    margin-top: 30px; 
+    font-size: 1.3rem;
+    display: none;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- SAYFA 1 -->
+<div id="page1" class="page active">
+  <h1>Hoş geldin güzelim</h1>
+  <p>Böyle küçük şeylere gülümseyişini seviyorum güllüm.</p>
+  <div class="btn" onclick="go(2)">Devam et 💗</div>
+</div>
+
+<!-- SAYFA 2 -->
+<div id="page2" class="page">
+  <h2>Bir şey söylemek istiyorum</h2>
+  <p>
+    Sana bazen söyleyemediklerimi buraya yazmak istedim güllüm.<br><br>
+    Bazı şeyler var ya… yüzüne söyleyince tam oturmuyor ama böyle yazınca daha güzel duruyor.<br><br>
+    Seninle konuşmak kolay ama bazı duygular var ki yazınca daha tam yerine oturuyor.
+  </p>
+  <div class="btn" onclick="go(3)">Bir şey daha 😏</div>
+</div>
+
+<!-- SAYFA 3 -->
+<div id="page3" class="page">
+  <h2>Beni seviyor musun?</h2>
+
+  <button onclick="yes()">Evet</button>
+  <button id="noBtn" onmouseover="escapeBtn()">Hayır</button>
+
+  <div id="msg">Ben de seni seviyorum güllüm 😍</div>
+</div>
+
+<script>
+function go(n) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("page" + n).classList.add("active");
+}
+
+function yes() {
+  document.getElementById("msg").style.display = "block";
+}
+
+function escapeBtn() {
+  const btn = document.getElementById("noBtn");
+  btn.style.transform = "translate(" + (Math.random()*200-100) + "px, " 
+    + (Math.random()*200-100) + "px)";
+}
+</script>
+
+</body>
+</html>
