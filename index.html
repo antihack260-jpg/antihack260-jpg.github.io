@@ -244,9 +244,8 @@ button:hover { background: #ff92cc; }
   <div class="love-container">
     <h2>Beni seviyor musun?</h2>
 
-    <!-- HAYIR ARTIK FIXED → ALTTAKİ EMOJİLERDEN BAĞIMSIZ -->
     <button onclick="yes()">Evet</button>
-    <button id="noBtn" onmouseover="escapeBtn(); angry();" style="position:fixed;">Hayır</button>
+    <button id="noBtn" onmouseover="escapeBtn(); angry();">Hayır</button>
 
     <div id="msg">Ben de seni seviyorum canım aşkım benim. 💗</div>
     <div id="angryArea"></div>
@@ -259,12 +258,13 @@ function go(n) {
   document.getElementById(n===2?'scroll':n===3?'love':'intro').classList.add('active');
 }
 
-/* Kaçan Hayır — TAM EKRANDA KAÇABİLİR */
+/* Düzeltilmiş kaçan hayır */
 function escapeBtn() {
   const btn = document.getElementById("noBtn");
 
+  btn.style.position = "relative";
   btn.style.transform =
-    "translate("+(Math.random()*400-200)+"px,"+(Math.random()*400-200)+"px)";
+    "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
 }
 
 /* Sinirli yüz */
@@ -291,15 +291,15 @@ function yes() {
       setTimeout(() => location.reload(), 1800);
     }, 1000);
 
-  }, 3000);
+  }, 3000); /* ← ARTIK 3 SANİYE */
 }
 
-/* Yayılma 1 → 2 → 4 → … → 128 */
+/* Yayılma efekti */
 function spreadHearts() {
   const c = document.getElementById("finalSpread");
   c.style.display = "block";
 
-  let count = 1;
+  let count = 1, steps = 0;
   const interval = setInterval(() => {
     for (let i = 0; i < count; i++) {
       let h = document.createElement("div");
@@ -310,11 +310,14 @@ function spreadHearts() {
       c.appendChild(h);
     }
     count *= 2;
-    if (count > 128) clearInterval(interval);
+    if (count >= 128) {
+      steps++;
+      if (steps > 2) clearInterval(interval);
+    }
   }, 200);
 }
 
-/* Dev tek kalp efekti */
+/* Tek dev kalp efekti */
 function bigHeart() {
   const h = document.getElementById("finalHeart");
   h.style.opacity = "1";
