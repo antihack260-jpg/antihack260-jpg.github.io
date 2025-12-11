@@ -72,7 +72,7 @@ body {
   font-size: 1.65rem;
 }
 
-/* Kalpler – orijinal animasyonu */
+/* Kalpler – orijinal animasyon */
 .heart-bg {
   position: fixed;
   width: 100%; height: 100%;
@@ -261,14 +261,16 @@ function yes() {
   }, 5000);
 }
 
-/* Kalp yayılma efekti */
+/* 8192 Kalp Yayılma Efekti */
 function spreadHearts() {
   const container = document.getElementById("finalSpread");
   container.style.display = "block";
 
   let count = 1;
+  let steps = 0;
 
   const interval = setInterval(() => {
+
     for (let i = 0; i < count; i++) {
       let h = document.createElement("div");
       h.classList.add("spreadHeart");
@@ -281,9 +283,14 @@ function spreadHearts() {
       container.appendChild(h);
     }
 
-    count *= 2; // 1 → 2 → 4 → 8 → 16 → 32 → 64 → 128
+    count *= 2;
 
-    if (count > 128) clearInterval(interval);
+    if (count >= 128) {
+      steps++;
+      if (steps > 6) {
+        clearInterval(interval);
+      }
+    }
 
   }, 200);
 }
