@@ -15,8 +15,19 @@ body {
   overflow-x: hidden;
 }
 
+/* Bölümler */
 .section { display: none; padding: 60px 20px; }
 .active { display: block; }
+
+/* Intro yazıları */
+.start-text {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 70px 20px 40px;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+@keyframes fadeIn { to { opacity: 1; } }
 
 /* Buton */
 .btn {
@@ -33,22 +44,13 @@ body {
 }
 .btn:hover { transform: scale(1.05); background: #ff92cc; }
 
-/* Intro yazıları */
-.start-text {
-  font-size: 1.5rem;
-  text-align: center;
-  margin: 70px 20px 40px;
-  opacity: 0;
-  animation: fadeIn 2s forwards;
-}
-@keyframes fadeIn { to { opacity: 1; } }
-
-/* Ok işareti */
+/* Ok */
 .down-arrow {
   font-size: 2.2rem;
   text-align: center;
   opacity: 0;
   animation: fadeArrow 2s forwards, arrowBounce 1.6s infinite;
+  font-weight: bold;
   color: #ff7bbf;
 }
 @keyframes fadeArrow { to { opacity: 0.7; } }
@@ -57,7 +59,7 @@ body {
   50% { transform: translateY(10px); }
 }
 
-/* Scroll bölümü */
+/* Scroll */
 .scroll-section {
   max-width: 800px;
   margin: 0 auto;
@@ -70,7 +72,7 @@ body {
   font-size: 1.65rem;
 }
 
-/* Arkaplan kalpler */
+/* Kalpler – Orijinal animasyon */
 .heart-bg {
   position: fixed;
   width: 100%; height: 100%;
@@ -82,12 +84,12 @@ body {
   position: absolute;
   font-size: 18px;
   color: #ff91c8;
-  animation: floatUp 7s linear infinite;
   opacity: 0.8;
+  animation: floatUp 7s linear infinite;
 }
 @keyframes floatUp {
-  0% { transform: translateY(50px); opacity: .8; }
-  100% { transform: translateY(-300px); opacity: 0; }
+  0%   { transform: translateY(40vh) scale(1); opacity: 0.9; }
+  100% { transform: translateY(-60vh) scale(1.6); opacity: 0; }
 }
 
 /* Love ekranı */
@@ -95,6 +97,7 @@ body {
   text-align: center;
   margin-top: 100px;
 }
+
 button {
   padding: 12px 25px;
   border: none;
@@ -115,16 +118,28 @@ button:hover { background: #ff92cc; }
   font-weight: 600;
 }
 
-/* Evet sonrası ekran kapanışı */
-.close-screen {
+/* Final kalp dalga animasyonu */
+#finalHeartContainer {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: #ffeef7;
-  opacity: 0;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
-  transition: opacity 1.5s ease;
-  z-index: 9999;
+  z-index: 999999;
+  display: none;
+}
+
+.bigHeart {
+  position: absolute;
+  font-size: 40px;
+  opacity: 0;
+  animation: expandHeart 2.2s ease-out forwards;
+  color: #ff7bbf;
+}
+
+@keyframes expandHeart {
+  0%   { transform: scale(0.2); opacity: 0.9; }
+  60%  { transform: scale(4); opacity: 0.6; }
+  100% { transform: scale(8); opacity: 0; }
 }
 </style>
 </head>
@@ -132,8 +147,7 @@ button:hover { background: #ff92cc; }
 <body>
 
 <div class="heart-bg" id="heartBg"></div>
-
-<div class="close-screen" id="closeScreen"></div>
+<div id="finalHeartContainer"></div>
 
 <!-- INTRO -->
 <div id="intro" class="section active">
@@ -147,8 +161,8 @@ button:hover { background: #ff92cc; }
     sana olan sevgimi hatırlayacağın küçük bir yer.
   </div>
 
-  <!-- OK BURADA – 2. CÜMLEYLE BİRLİKTE -->
-  <div class="down-arrow" style="animation-delay:1.5s;">↓</div>
+  <!-- Ok tam burada çıkıyor -->
+  <div class="down-arrow" style="animation-delay:1.6s;">↓</div>
 
   <div class="start-text" style="animation-delay:3.3s;">
     Bunu görmeye hazır mısın?
@@ -166,10 +180,9 @@ button:hover { background: #ff92cc; }
 
     <h2>• Seni İlk Tanıdığım Zaman</h2>
     <p>
-      Hayat bazen çok garip şekillerde sürpriz yapıyor insana...  
+      Hayat bazen çok garip şekillerde sürpriz yapıyor insana.  
       O zamanlar hiçbir şey beklemiyordum ama bir anda sen çıktın karşıma.  
-      Bazen biriyle konuşmaya başlarsın ve fark etmeden kendini daha çok konuşurken bulursun ya…  
-      işte öyle oldu.
+      Normal bir konuşmaydı… sonra uzun uzun konuştuğum biri oldun.
     </p>
 
     <h2>• Senin Hakkında En Sevdiğim Şeyler</h2>
@@ -181,7 +194,7 @@ button:hover { background: #ff92cc; }
     <h2>• Seni Sevme Şeklim</h2>
     <p>
       Bazen bir şey anlatıyorsun, dalıyorum…  
-      çünkü o anı izlemek bile güzel.  
+      çünkü seni izlemek bile güzel geliyor.  
       Bazen sinirleniyorsun, o bile tatlı geliyor.  
       Bazen sadece varsın ve bu bile yetiyor.
     </p>
@@ -197,7 +210,7 @@ button:hover { background: #ff92cc; }
     <p>
       Eğer bir gün kötü hissedersen, yorulursan, kafan karışırsa…  
       burayı aç.  
-      Okudukların seni biraz bile sararsa… amacına ulaşmışım demektir.
+      Bu sayfa seni biraz bile sararsa… amacına ulaştı.
     </p>
 
     <h2>• Hazırsan…</h2>
@@ -225,42 +238,57 @@ button:hover { background: #ff92cc; }
 
 
 <script>
+/* Bölüm değiştirme */
 function go(n) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(n === 2 ? 'scroll' : n === 3 ? 'love' : 'intro').classList.add('active');
 }
 
+/* Kaçan Hayır */
 function escapeBtn() {
   const btn = document.getElementById("noBtn");
-  btn.style.transform = "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
+  btn.style.transform =
+    "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
 }
 
+/* Evet – final animasyonu */
 function yes() {
   document.getElementById("msg").style.display = "block";
 
-  // Kapanış animasyonu
   setTimeout(() => {
-    const screen = document.getElementById("closeScreen");
-    screen.style.opacity = "1";
+    triggerHeartExplosion();
 
-    // yeniden başlat
     setTimeout(() => {
       location.reload();
-    }, 1600);
+    }, 2400);
 
-  }, 700);
+  }, 600);
 }
 
-// Kalp üretimi
+/* Final büyük kalpler efekti */
+function triggerHeartExplosion() {
+  const c = document.getElementById("finalHeartContainer");
+  c.style.display = "block";
+
+  for (let i = 0; i < 4; i++) {
+    let h = document.createElement("div");
+    h.classList.add("bigHeart");
+    h.style.animationDelay = (i * 0.4) + "s";
+    h.innerHTML = "💗";
+    c.appendChild(h);
+  }
+}
+
+/* Arkaplan kalpleri */
 function createHearts(){
   const bg = document.getElementById("heartBg");
-  for(let i=0; i<35; i++){
+
+  for(let i=0; i<25; i++){
     let h = document.createElement("div");
     h.classList.add("heart");
     h.innerHTML = "❤️";
     h.style.left = Math.random()*100 + "%";
-    h.style.bottom = "0px";
-    h.style.animationDelay = (Math.random()*5)+"s";
+    h.style.animationDelay = (Math.random()*6)+"s";
     bg.appendChild(h);
   }
 }
