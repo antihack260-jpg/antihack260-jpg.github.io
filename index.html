@@ -276,11 +276,15 @@ function go(n) {
   document.getElementById(n === 2 ? 'scroll' : n === 3 ? 'love' : 'intro').classList.add('active');
 }
 
-/* Kaçan Hayır */
+/* Kaçan Hayır – tıklanabilir olacak şekilde GECİKMELİ */
 function escapeBtn() {
   const btn = document.getElementById("noBtn");
-  btn.style.transform =
-    "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
+
+  // Kaçmadan önce ufak gecikme → tıklanabilir oluyor
+  setTimeout(() => {
+    btn.style.transform =
+      "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
+  }, 150);
 }
 
 /* Hayır tıklanınca sinirli yüz */
