@@ -72,7 +72,7 @@ body {
   font-size: 1.65rem;
 }
 
-/* Kalpler – orijinal animasyon */
+/* Arka plan kalpleri */
 .heart-bg {
   position: fixed;
   width: 100%; height: 100%;
@@ -135,29 +135,45 @@ button:hover { background: #ff92cc; }
   to   { transform: scale(1); opacity: 1; }
 }
 
-/* Yayılma final efekti */
+/* Yayılma final kalpleri */
 #finalSpread {
   position: fixed;
   left: 0; top: 0;
   width: 100%; height: 100%;
   display: none;
-  z-index: 999999;
+  z-index: 99999;
   pointer-events: none;
   overflow: hidden;
 }
 
 .spreadHeart {
   position: absolute;
-  font-size: 40px;
+  font-size: 35px;
   opacity: 0;
-  animation: spreadAnim 2.2s ease-out forwards;
+  animation: spreadAnim 1.4s ease-out forwards;
   color: #ff7bbf;
 }
 
 @keyframes spreadAnim {
   0%   { transform: scale(0.4); opacity: 0.9; }
-  40%  { transform: scale(2.5); opacity: 0.9; }
-  100% { transform: scale(5); opacity: 0; }
+  40%  { transform: scale(1.8); opacity: 0.9; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* Dev kalp */
+#finalHeart {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  font-size: 40px;
+  opacity: 0;
+  z-index: 999999;
+  color: #ff7bbf;
+}
+@keyframes growHeart {
+  0%   { transform: translate(-50%, -50%) scale(0.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(25); opacity: 0; }
 }
 </style>
 </head>
@@ -166,6 +182,7 @@ button:hover { background: #ff92cc; }
 
 <div class="heart-bg" id="heartBg"></div>
 <div id="finalSpread"></div>
+<div id="finalHeart">💗</div>
 
 <!-- INTRO -->
 <div id="intro" class="section active">
@@ -263,7 +280,6 @@ button:hover { background: #ff92cc; }
     <button id="noBtn" onmouseover="escapeBtn()" onclick="angry()">Hayır</button>
 
     <div id="msg">Ben de seni seviyorum canım aşkım benim. 💗</div>
-
     <div id="angryArea"></div>
   </div>
 </div>
@@ -276,47 +292,47 @@ function go(n) {
   document.getElementById(n === 2 ? 'scroll' : n === 3 ? 'love' : 'intro').classList.add('active');
 }
 
-/* Kaçan Hayır – tıklanabilir olacak şekilde GECİKMELİ */
+/* Kaçan Hayır — gecikmeli */
 function escapeBtn() {
   const btn = document.getElementById("noBtn");
-
-  // Kaçmadan önce ufak gecikme → tıklanabilir oluyor
   setTimeout(() => {
     btn.style.transform =
       "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
   }, 150);
 }
 
-/* Hayır tıklanınca sinirli yüz */
+/* Hayır → sinirli yüz */
 function angry() {
   const area = document.getElementById("angryArea");
-
   let face = document.createElement("div");
   face.classList.add("angry-face");
   face.innerHTML = "😠";
-
-  face.style.left = Math.random() * 80 + "%";
-  face.style.top = Math.random() * 80 + "%";
-
+  face.style.left = Math.random()*80 + "%";
+  face.style.top = Math.random()*80 + "%";
   area.appendChild(face);
 }
 
-/* Evet – final efekti */
+/* Evet → 5 sn → yayılma → dev kalp → yenile */
 function yes() {
   document.getElementById("msg").style.display = "block";
-
-  // sinirli yüzleri sil
   document.getElementById("angryArea").innerHTML = "";
 
   setTimeout(() => {
     spreadHearts();
+
     setTimeout(() => {
-      location.reload();
-    }, 2500);
+      bigHeart();
+
+      setTimeout(() => {
+        location.reload();
+      }, 1800);
+
+    }, 1000);
+
   }, 5000);
 }
 
-/* 2048 Kalplilik Yayılma Efekti (4 adım) */
+/* Yayılma (2 adım: 128 → 256 → 512) */
 function spreadHearts() {
   const container = document.getElementById("finalSpread");
   container.style.display = "block";
@@ -325,15 +341,13 @@ function spreadHearts() {
   let steps = 0;
 
   const interval = setInterval(() => {
-
     for (let i = 0; i < count; i++) {
       let h = document.createElement("div");
       h.classList.add("spreadHeart");
       h.innerHTML = "💗";
 
-      h.style.left = (Math.random() * 100) + "%";
-      h.style.top = (Math.random() * 100) + "%";
-      h.style.animationDelay = (Math.random() * 0.3) + "s";
+      h.style.left = (Math.random()*100)+"%";
+      h.style.top  = (Math.random()*100)+"%";
 
       container.appendChild(h);
     }
@@ -342,7 +356,7 @@ function spreadHearts() {
 
     if (count >= 128) {
       steps++;
-      if (steps > 4) {
+      if (steps > 2) {
         clearInterval(interval);
       }
     }
@@ -350,7 +364,14 @@ function spreadHearts() {
   }, 200);
 }
 
-/* Arkaplan kalpleri */
+/* Dev tek kalp */
+function bigHeart() {
+  const h = document.getElementById("finalHeart");
+  h.style.opacity = "1";
+  h.style.animation = "growHeart 1.6s forwards ease-out";
+}
+
+/* Arka plan kalpleri */
 function createHearts(){
   const bg = document.getElementById("heartBg");
 
