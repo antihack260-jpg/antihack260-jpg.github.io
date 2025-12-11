@@ -18,7 +18,6 @@ body {
 .section { display: none; padding: 60px 20px; }
 .active { display: block; }
 
-/* Buton */
 .btn {
   padding: 12px 28px;
   background: #ff7bbf;
@@ -33,32 +32,28 @@ body {
 }
 .btn:hover { transform: scale(1.05); background: #ff92cc; }
 
-/* Intro yazıları */
 .start-text {
   font-size: 1.5rem;
   text-align: center;
-  margin: 120px 20px 40px;
+  margin: 70px 20px 40px;
   opacity: 0;
   animation: fadeIn 2s forwards;
 }
 @keyframes fadeIn { to { opacity: 1; } }
 
-/* Aşağı ok */
 .down-arrow {
   font-size: 2.2rem;
   text-align: center;
-  margin-top: 60px;
+  margin-top: 20px;
   opacity: 0.7;
   animation: arrowBounce 1.6s infinite;
   color: #ff7bbf;
 }
 @keyframes arrowBounce {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(12px); }
-  100% { transform: translateY(0); }
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
 }
 
-/* Scroll bölümü */
 .scroll-section {
   max-width: 800px;
   margin: 0 auto;
@@ -78,21 +73,20 @@ body {
   top: 0; left: 0;
   z-index: -1;
   overflow: hidden;
-  pointer-events: none;
 }
 .heart {
   position: absolute;
   font-size: 18px;
   color: #ff91c8;
   animation: floatUp 7s linear infinite;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 @keyframes floatUp {
-  0% { transform: translateY(80px) scale(1); opacity: .6; }
-  100% { transform: translateY(-800px) scale(1.6); opacity: 0; }
+  0% { transform: translateY(50px); }
+  100% { transform: translateY(-300px); }
 }
 
-/* Love ekranı */
+/* Ask screen */
 .love-container {
   text-align: center;
   margin-top: 100px;
@@ -116,6 +110,28 @@ button:hover { background: #ff92cc; }
   display: none;
   font-weight: 600;
 }
+
+/* Düşen kalpler */
+.fall {
+  animation: fallDown 1.5s forwards;
+}
+@keyframes fallDown {
+  0% { transform: translateY(-300px); }
+  90% { transform: translateY(80vh); }
+  100% { transform: translateY(75vh) scale(1.1); }
+}
+
+/* Çiçek Veren Kedi (SVG) */
+.kitty {
+  width: 180px;
+  margin: 30px auto 0;
+  display: none;
+  animation: pop 0.6s ease forwards;
+}
+@keyframes pop {
+  0% { transform: scale(0.3) translateY(40px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
 </style>
 </head>
 
@@ -126,43 +142,46 @@ button:hover { background: #ff92cc; }
 <!-- INTRO -->
 <div id="intro" class="section active">
   <div class="start-text" style="animation-delay:0s;">Gerçekten sana normal bir anahtarlık vereceğimi mi sandın?</div>
-  <div class="start-text" style="animation-delay:2s;">Bu... ne zaman beni özlersen açıp<br> sana olan sevgimi hatırlayacağın küçük bir yer.</div>
-  <div class="start-text" style="animation-delay:4s;">Bunu görmeye hazır mısın?</div>
+
+  <div class="start-text" style="animation-delay:1.6s;">
+    Bu... ne zaman beni özlersen açıp<br>
+    sana olan sevgimi hatırlayacağın küçük bir yer.
+  </div>
+
+  <div class="down-arrow" style="animation-delay:3.5s;">↓</div>
+
+  <div class="start-text" style="animation-delay:4.2s;">Bunu görmeye hazır mısın?</div>
 
   <div style="text-align:center; margin-top:40px;">
     <span class="btn" onclick="go(2)">Evet</span>
   </div>
-
-  <div class="down-arrow">↓</div>
 </div>
 
 
-<!-- SCROLL SAYFASI -->
+<!-- SCROLL -->
 <div id="scroll" class="section">
   <div class="scroll-section">
 
     <h2>• Seni İlk Tanıdığım Zaman</h2>
     <p>
-      Hayat bazen çok garip şekillerde sürpriz yapıyor insana.  
-      O zamanlar hiçbir şey beklemiyordum… ama bir anda sen çıktın karşıma.  
-      Bazen biriyle konuşmaya başlarsın ve fark etmeden kendini daha çok konuşurken bulursun ya…   
-      işte öyle oldu. Ne ara alıştım sana, gerçekten bilmiyorum.
+      Hayat bazen çok garip şekillerde sürpriz yapıyor insana...  
+      O zamanlar hiçbir şey beklemiyordum ama bir anda sen çıktın karşıma.  
+      Bazen biriyle konuşmaya başlarsın ve fark etmeden kendini daha çok konuşurken bulursun ya…  
+      işte öyle oldu.
     </p>
 
     <h2>• Senin Hakkında En Sevdiğim Şeyler</h2>
     <p>
-      En sevdiğim şey dış görünüşün değil, karakterin değil…  
-      <strong>bende bıraktığın his.</strong><br><br>
-      Birini görünce içinin hafiflemesi diye bir şey var ya…  
-      sende olan tam olarak o.
+      En sevdiğim şey dış görünüşün ya da karakterin değil…  
+      <strong>bende bıraktığın his.</strong>  
+      İçimi rahatlatan, yumuşatan o şey.
     </p>
 
     <h2>• Seni Sevme Şeklim</h2>
     <p>
-      Bazen bir şey anlatıyorsun, dalıyorum…  
-      çünkü mimiklerini izlemek bile ayrı güzel.  
-      Bazen bir şeye sinirleniyorsun, yine tatlı geliyorsun.  
-      Bazen de sadece var oluyorsun… ve bu bile yetiyor.
+      Bazen bir şey anlatıyorsun, dalıyorum… çünkü o anı izlemek bile güzel.  
+      Bazen sinirleniyorsun, o bile tatlı geliyor.  
+      Bazen sadece varsın ve bu bile yetiyor.
     </p>
 
     <h2>• Söyleyemediğim Şeyler</h2>
@@ -175,7 +194,8 @@ button:hover { background: #ff92cc; }
     <h2>• Bir Şey Daha</h2>
     <p>
       Eğer bir gün kötü hissedersen, yorulursan, kafan karışırsa…  
-      burayı aç. Okudukların seni biraz bile sararsa… amacına ulaşmışım demektir.
+      burayı aç.  
+      Okudukların seni biraz bile sararsa… amacına ulaşmışım demektir.
     </p>
 
     <h2>• Hazırsan…</h2>
@@ -189,7 +209,7 @@ button:hover { background: #ff92cc; }
 </div>
 
 
-<!-- LOVE SAYFASI -->
+<!-- LOVE -->
 <div id="love" class="section">
   <div class="love-container">
     <h2>Beni seviyor musun?</h2>
@@ -198,38 +218,44 @@ button:hover { background: #ff92cc; }
     <button id="noBtn" onmouseover="escapeBtn()">Hayır</button>
 
     <div id="msg">Ben de seni seviyorum canım aşkım benim. 💗</div>
+
+    <!-- Çiçek Veren Kedi SVG -->
+    <div id="kitty" class="kitty">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Noto_Emoji_v2.034_1f63b.svg/240px-Noto_Emoji_v2.034_1f63b.svg.png" width="140">
+    </div>
   </div>
 </div>
 
 
-
 <script>
-// Bölüm değişimi
 function go(n) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(n === 2 ? 'scroll' : n === 3 ? 'love' : 'intro').classList.add('active');
 }
 
-// Hayır kaçsın
 function escapeBtn() {
   const btn = document.getElementById("noBtn");
   btn.style.transform = "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
 }
 
-// Evet
 function yes() {
   document.getElementById("msg").style.display = "block";
+  document.getElementById("kitty").style.display = "block";
+
+  // Kalpleri düşür
+  document.querySelectorAll(".heart").forEach(h => h.classList.add("fall"));
 }
 
-// Kalpler
+// Kalpleri yukarı biriktir
 function createHearts(){
   const bg = document.getElementById("heartBg");
-  for(let i=0; i<25; i++){
+  for(let i=0; i<40; i++){
     let h = document.createElement("div");
     h.classList.add("heart");
     h.innerHTML = "❤️";
     h.style.left = Math.random()*100 + "%";
-    h.style.animationDelay = (Math.random()*7)+"s";
+    h.style.bottom = "0px";
+    h.style.animationDelay = (Math.random()*5)+"s";
     bg.appendChild(h);
   }
 }
@@ -237,4 +263,4 @@ createHearts();
 </script>
 
 </body>
-</html>
+</html> 
