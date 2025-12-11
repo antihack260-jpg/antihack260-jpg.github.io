@@ -59,12 +59,12 @@ body {
   50% { transform: translateY(10px); }
 }
 
-/* Scroll */
+/* Scroll metinleri */
 .scroll-section {
   max-width: 800px;
   margin: 0 auto;
   font-size: 1.15rem;
-  line-height: 1.8;
+  line-height: 1.85;
 }
 .scroll-section h2 {
   margin-top: 60px;
@@ -174,37 +174,56 @@ button:hover { background: #ff92cc; }
 </div>
 
 
-<!-- SCROLL -->
+<!-- SCROLL (UZUN HALİ GERİ GETİRİLDİ) -->
 <div id="scroll" class="section">
   <div class="scroll-section">
 
     <h2>• Seni İlk Tanıdığım Zaman</h2>
     <p>
       Hayat bazen çok garip şekillerde sürpriz yapıyor insana.  
-      O zaman hiçbir şey beklemiyordum… ama sen çıktın karşıma.
+      O zamanlar hiçbir şey beklemiyordum… ama bir anda sen çıktın karşıma.  
+      Normal bir konuşmaydı, sıradan bir şeydi… ama sonra fark ettim ki  
+      seni tanımak düşündüğümden çok daha güzeldi.  
+      Bir insanı tanırken bazen zaman akar, bazen geçmez ya…  
+      senle hep güzel aktı.
     </p>
 
     <h2>• Senin Hakkında En Sevdiğim Şeyler</h2>
     <p>
-      En sevdiğim şey dış görünüşün ya da karakterin değil…  
-      <strong>bende bıraktığın his.</strong>
+      En sevdiğim şey sadece dış görünüşün değil;  
+      duruşun, konuşman, sakinliğin, bazen tatlı sinirlerin…  
+      ama en önemlisi bende bıraktığın his.  
+      Birini görünce içinin hafiflemesi diye bir şey var ya…  
+      işte sende olan tam olarak o.
     </p>
 
     <h2>• Seni Sevme Şeklim</h2>
     <p>
       Bazen bir şey anlatıyorsun, dalıyorum…  
-      çünkü seni izlemek bile güzel.
+      çünkü seni izlemek bile güzel geliyor.  
+      Bazen sinirleniyorsun, yine tatlı geliyorsun.  
+      Bazen sadece var oluyorsun… ve bu bile yetiyor.  
+      Birini severken en çok ne hoşuma gidiyor biliyor musun?  
+      Onu düşündüğümde gülümsemem.  
+      Sen hep öylesin.
     </p>
 
     <h2>• Söyleyemediğim Şeyler</h2>
     <p>
-      “Seni düşündüğümde istemsizce gülümsüyorum.”
+      Bazı cümleler yüksek sesle söylenince tam olmuyor ama yazınca çok güzel duruyor.  
+      Mesela:  
+      <strong>“Seni düşündüğümde istemsizce gülümsüyorum.”</strong><br><br>
+      Bazen söyleyemediğim şeyler yazınca daha doğru geliyor;  
+      belki bu yüzden burayı yaptım.
     </p>
 
     <h2>• Bir Şey Daha</h2>
     <p>
-      Ne zaman kötü hissetsen burayı aç.  
-      Belki biraz iyi gelir.
+      Eğer bir gün kötü hissedersen, yorulursan, kafan karışırsa…  
+      burayı aç.  
+      Belki okudukların biraz olsun sarar seni.  
+      Belki bir anlığına bile olsa iyi hissettirir.  
+      Zaten amacım tam olarak buydu.
     </p>
 
     <h2>• Hazırsan…</h2>
@@ -249,11 +268,11 @@ function escapeBtn() {
 function yes() {
   document.getElementById("msg").style.display = "block";
 
-  // 5 saniye bekle → kalp patlaması başlasın
+  // 5 saniye bekle → kalp yayılma başlasın
   setTimeout(() => {
     spreadHearts();
 
-    // tamamen bitince 2.5 saniye sonra reset
+    // tamamen bitince reset
     setTimeout(() => {
       location.reload();
     }, 2500);
