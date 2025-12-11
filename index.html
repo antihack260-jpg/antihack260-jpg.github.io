@@ -280,13 +280,13 @@ function yes() {
   }, 5000);
 }
 
-/* 8192 Kalp Yayılma Efekti */
+/* 2048 Kalplilik Yayılma Efekti (4 adım) */
 function spreadHearts() {
   const container = document.getElementById("finalSpread");
   container.style.display = "block";
 
   let count = 1;
-  let steps = 0;
+  let steps = 0; // 128'den sonra sadece 4 kere devam edecek
 
   const interval = setInterval(() => {
 
@@ -302,17 +302,18 @@ function spreadHearts() {
       container.appendChild(h);
     }
 
-    count *= 2;
+    count *= 2; // her adımda 2 katına çıkıyor
 
+    // 128'e ulaşınca 4 adım say
     if (count >= 128) {
       steps++;
-      if (steps > 6) {
+      if (steps > 4) {   // eskisi 6 idi → şimdi 4
         clearInterval(interval);
       }
     }
 
   }, 200);
-}
+         }
 
 /* Arkaplan kalpleri */
 function createHearts(){
