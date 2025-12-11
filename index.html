@@ -15,11 +15,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Bölümler */
 .section { display: none; padding: 60px 20px; }
 .active { display: block; }
 
-/* Intro yazıları */
 .start-text {
   font-size: 1.5rem;
   text-align: center;
@@ -29,14 +27,12 @@ body {
 }
 @keyframes fadeIn { to { opacity: 1; } }
 
-/* Buton */
 .btn {
   padding: 12px 28px;
   background: #ff7bbf;
   color: white;
   border-radius: 30px;
   cursor: pointer;
-  text-decoration: none;
   display: inline-block;
   font-weight: 600;
   margin-top: 25px;
@@ -44,22 +40,16 @@ body {
 }
 .btn:hover { transform: scale(1.05); background: #ff92cc; }
 
-/* Ok */
 .down-arrow {
   font-size: 2.2rem;
   text-align: center;
   opacity: 0;
   animation: fadeArrow 2s forwards, arrowBounce 1.6s infinite;
-  font-weight: bold;
   color: #ff7bbf;
 }
 @keyframes fadeArrow { to { opacity: 0.7; } }
-@keyframes arrowBounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(10px); }
-}
+@keyframes arrowBounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(10px);} }
 
-/* Scroll metinleri */
 .scroll-section {
   max-width: 800px;
   margin: 0 auto;
@@ -72,7 +62,6 @@ body {
   font-size: 1.65rem;
 }
 
-/* Arka plan kalpleri */
 .heart-bg {
   position: fixed;
   width: 100%; height: 100%;
@@ -92,7 +81,6 @@ body {
   100% { transform: translateY(-60vh); opacity: 0; }
 }
 
-/* Love ekranı */
 .love-container {
   text-align: center;
   margin-top: 100px;
@@ -118,7 +106,6 @@ button:hover { background: #ff92cc; }
   font-weight: 600;
 }
 
-/* Sinirli yüz alanı */
 #angryArea {
   position: relative;
   width: 100%;
@@ -128,24 +115,21 @@ button:hover { background: #ff92cc; }
 .angry-face {
   position: absolute;
   font-size: 2rem;
-  animation: appear 0.3s ease-out forwards;
+  animation: appear .3s ease-out forwards;
 }
 @keyframes appear {
-  from { transform: scale(0.4); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
+  from { opacity: 0; transform: scale(0.4); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-/* Yayılma final kalpleri */
 #finalSpread {
   position: fixed;
-  left: 0; top: 0;
+  top: 0; left: 0;
   width: 100%; height: 100%;
   display: none;
-  z-index: 99999;
+  z-index: 9999;
   pointer-events: none;
-  overflow: hidden;
 }
-
 .spreadHeart {
   position: absolute;
   font-size: 35px;
@@ -153,22 +137,19 @@ button:hover { background: #ff92cc; }
   animation: spreadAnim 1.4s ease-out forwards;
   color: #ff7bbf;
 }
-
 @keyframes spreadAnim {
-  0%   { transform: scale(0.4); opacity: 0.9; }
-  40%  { transform: scale(1.8); opacity: 0.9; }
+  0%   { transform: scale(0.4); opacity: 1; }
+  40%  { transform: scale(1.8); opacity: 1; }
   100% { transform: scale(3); opacity: 0; }
 }
 
-/* Dev kalp */
 #finalHeart {
   position: fixed;
-  left: 50%;
-  top: 50%;
+  left: 50%; top: 50%;
   transform: translate(-50%, -50%) scale(0.1);
   font-size: 40px;
   opacity: 0;
-  z-index: 999999;
+  z-index: 99999;
   color: #ff7bbf;
 }
 @keyframes growHeart {
@@ -186,27 +167,15 @@ button:hover { background: #ff92cc; }
 
 <!-- INTRO -->
 <div id="intro" class="section active">
-
-  <div class="start-text" style="animation-delay:0s;">
-    Gerçekten sana normal bir anahtarlık vereceğimi mi sandın?
-  </div>
-
-  <div class="start-text" style="animation-delay:1.5s;">
-    Bu... ne zaman beni özlersen açıp<br>
-    sana olan sevgimi hatırlayacağın küçük bir yer.
-  </div>
-
+  <div class="start-text" style="animation-delay:0s;">Gerçekten sana normal bir anahtarlık vereceğimi mi sandın?</div>
+  <div class="start-text" style="animation-delay:1.5s;">Bu... ne zaman beni özlersen açıp<br> sana olan sevgimi hatırlayacağın küçük bir yer.</div>
   <div class="down-arrow" style="animation-delay:1.6s;">↓</div>
-
-  <div class="start-text" style="animation-delay:3.3s;">
-    Bunu görmeye hazır mısın?
-  </div>
+  <div class="start-text" style="animation-delay:3.3s;">Bunu görmeye hazır mısın?</div>
 
   <div style="text-align:center; margin-top:40px;">
     <span class="btn" onclick="go(2)">Evet</span>
   </div>
 </div>
-
 
 <!-- SCROLL -->
 <div id="scroll" class="section">
@@ -270,38 +239,35 @@ button:hover { background: #ff92cc; }
   </div>
 </div>
 
-
 <!-- LOVE -->
 <div id="love" class="section">
   <div class="love-container">
     <h2>Beni seviyor musun?</h2>
 
     <button onclick="yes()">Evet</button>
-    <button id="noBtn" onmouseover="escapeBtn()" onclick="angry()">Hayır</button>
+    <button id="noBtn" onmouseover="escapeBtn(); angry();">Hayır</button>
 
     <div id="msg">Ben de seni seviyorum canım aşkım benim. 💗</div>
     <div id="angryArea"></div>
   </div>
 </div>
 
-
 <script>
-/* Bölüm değiştirme */
 function go(n) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(n === 2 ? 'scroll' : n === 3 ? 'love' : 'intro').classList.add('active');
+  document.getElementById(n===2?'scroll':n===3?'love':'intro').classList.add('active');
 }
 
-/* Kaçan Hayır — gecikmeli */
+/* Düzeltilmiş kaçan hayır */
 function escapeBtn() {
   const btn = document.getElementById("noBtn");
-  setTimeout(() => {
-    btn.style.transform =
-      "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
-  }, 150);
+
+  btn.style.position = "relative";
+  btn.style.transform =
+    "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
 }
 
-/* Hayır → sinirli yüz */
+/* Sinirli yüz */
 function angry() {
   const area = document.getElementById("angryArea");
   let face = document.createElement("div");
@@ -312,7 +278,7 @@ function angry() {
   area.appendChild(face);
 }
 
-/* Evet → 5 sn → yayılma → dev kalp → yenile */
+/* EVET → 3 saniye bekleme */
 function yes() {
   document.getElementById("msg").style.display = "block";
   document.getElementById("angryArea").innerHTML = "";
@@ -322,49 +288,36 @@ function yes() {
 
     setTimeout(() => {
       bigHeart();
-
-      setTimeout(() => {
-        location.reload();
-      }, 1800);
-
+      setTimeout(() => location.reload(), 1800);
     }, 1000);
 
-  }, 5000);
+  }, 3000); /* ← ARTIK 3 SANİYE */
 }
 
-/* Yayılma (2 adım: 128 → 256 → 512) */
+/* Yayılma efekti */
 function spreadHearts() {
-  const container = document.getElementById("finalSpread");
-  container.style.display = "block";
+  const c = document.getElementById("finalSpread");
+  c.style.display = "block";
 
-  let count = 1;
-  let steps = 0;
-
+  let count = 1, steps = 0;
   const interval = setInterval(() => {
     for (let i = 0; i < count; i++) {
       let h = document.createElement("div");
       h.classList.add("spreadHeart");
       h.innerHTML = "💗";
-
-      h.style.left = (Math.random()*100)+"%";
-      h.style.top  = (Math.random()*100)+"%";
-
-      container.appendChild(h);
+      h.style.left = Math.random()*100+"%";
+      h.style.top  = Math.random()*100+"%";
+      c.appendChild(h);
     }
-
     count *= 2;
-
     if (count >= 128) {
       steps++;
-      if (steps > 2) {
-        clearInterval(interval);
-      }
+      if (steps > 2) clearInterval(interval);
     }
-
   }, 200);
 }
 
-/* Dev tek kalp */
+/* Tek dev kalp efekti */
 function bigHeart() {
   const h = document.getElementById("finalHeart");
   h.style.opacity = "1";
@@ -374,13 +327,12 @@ function bigHeart() {
 /* Arka plan kalpleri */
 function createHearts(){
   const bg = document.getElementById("heartBg");
-
   for(let i=0; i<25; i++){
-    let h = document.createElement("div");
+    let h=document.createElement("div");
     h.classList.add("heart");
-    h.innerHTML = "❤️";
-    h.style.left = Math.random()*100 + "%";
-    h.style.animationDelay = (Math.random()*6)+"s";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"%";
+    h.style.animationDelay=(Math.random()*6)+"s";
     bg.appendChild(h);
   }
 }
