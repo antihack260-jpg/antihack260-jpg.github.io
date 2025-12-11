@@ -72,7 +72,7 @@ body {
   font-size: 1.65rem;
 }
 
-/* Kalpler – Orijinal animasyon */
+/* Kalpler – orijinal animasyonu */
 .heart-bg {
   position: fixed;
   width: 100%; height: 100%;
@@ -89,7 +89,7 @@ body {
 }
 @keyframes floatUp {
   0%   { transform: translateY(40vh) scale(1); opacity: 0.9; }
-  100% { transform: translateY(-60vh) scale(1.6); opacity: 0; }
+  100% { transform: translateY(-60vh); opacity: 0; }
 }
 
 /* Love ekranı */
@@ -118,28 +118,29 @@ button:hover { background: #ff92cc; }
   font-weight: 600;
 }
 
-/* Final kalp dalga animasyonu */
-#finalHeartContainer {
+/* Yayılma final efekti */
+#finalSpread {
   position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 999999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
   display: none;
+  z-index: 999999;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.bigHeart {
+.spreadHeart {
   position: absolute;
   font-size: 40px;
   opacity: 0;
-  animation: expandHeart 2.2s ease-out forwards;
+  animation: spreadAnim 2.2s ease-out forwards;
   color: #ff7bbf;
 }
 
-@keyframes expandHeart {
-  0%   { transform: scale(0.2); opacity: 0.9; }
-  60%  { transform: scale(4); opacity: 0.6; }
-  100% { transform: scale(8); opacity: 0; }
+@keyframes spreadAnim {
+  0%   { transform: scale(0.4); opacity: 0.9; }
+  40%  { transform: scale(2.5); opacity: 0.9; }
+  100% { transform: scale(5); opacity: 0; }
 }
 </style>
 </head>
@@ -147,7 +148,7 @@ button:hover { background: #ff92cc; }
 <body>
 
 <div class="heart-bg" id="heartBg"></div>
-<div id="finalHeartContainer"></div>
+<div id="finalSpread"></div>
 
 <!-- INTRO -->
 <div id="intro" class="section active">
@@ -161,7 +162,6 @@ button:hover { background: #ff92cc; }
     sana olan sevgimi hatırlayacağın küçük bir yer.
   </div>
 
-  <!-- Ok tam burada çıkıyor -->
   <div class="down-arrow" style="animation-delay:1.6s;">↓</div>
 
   <div class="start-text" style="animation-delay:3.3s;">
@@ -181,8 +181,7 @@ button:hover { background: #ff92cc; }
     <h2>• Seni İlk Tanıdığım Zaman</h2>
     <p>
       Hayat bazen çok garip şekillerde sürpriz yapıyor insana.  
-      O zamanlar hiçbir şey beklemiyordum ama bir anda sen çıktın karşıma.  
-      Normal bir konuşmaydı… sonra uzun uzun konuştuğum biri oldun.
+      O zaman hiçbir şey beklemiyordum… ama sen çıktın karşıma.  
     </p>
 
     <h2>• Senin Hakkında En Sevdiğim Şeyler</h2>
@@ -194,9 +193,8 @@ button:hover { background: #ff92cc; }
     <h2>• Seni Sevme Şeklim</h2>
     <p>
       Bazen bir şey anlatıyorsun, dalıyorum…  
-      çünkü seni izlemek bile güzel geliyor.  
+      çünkü seni izlemek bile güzel.  
       Bazen sinirleniyorsun, o bile tatlı geliyor.  
-      Bazen sadece varsın ve bu bile yetiyor.
     </p>
 
     <h2>• Söyleyemediğim Şeyler</h2>
@@ -208,9 +206,8 @@ button:hover { background: #ff92cc; }
 
     <h2>• Bir Şey Daha</h2>
     <p>
-      Eğer bir gün kötü hissedersen, yorulursan, kafan karışırsa…  
-      burayı aç.  
-      Bu sayfa seni biraz bile sararsa… amacına ulaştı.
+      Ne zaman kötü hissetsen, yorulsan…  
+      burayı açman yeterli.  
     </p>
 
     <h2>• Hazırsan…</h2>
@@ -251,32 +248,44 @@ function escapeBtn() {
     "translate("+(Math.random()*300-150)+"px,"+(Math.random()*300-150)+"px)";
 }
 
-/* Evet – final animasyonu */
+/* Evet – final efekti */
 function yes() {
   document.getElementById("msg").style.display = "block";
 
   setTimeout(() => {
-    triggerHeartExplosion();
+    spreadHearts();
 
     setTimeout(() => {
       location.reload();
-    }, 2400);
+    }, 2500);
 
   }, 600);
 }
 
-/* Final büyük kalpler efekti */
-function triggerHeartExplosion() {
-  const c = document.getElementById("finalHeartContainer");
-  c.style.display = "block";
+/* Kalp yayılma efekti */
+function spreadHearts() {
+  const container = document.getElementById("finalSpread");
+  container.style.display = "block";
 
-  for (let i = 0; i < 4; i++) {
-    let h = document.createElement("div");
-    h.classList.add("bigHeart");
-    h.style.animationDelay = (i * 0.4) + "s";
-    h.innerHTML = "💗";
-    c.appendChild(h);
-  }
+  let count = 1;
+
+  const interval = setInterval(() => {
+    for (let i = 0; i < count; i++) {
+      let h = document.createElement("div");
+      h.classList.add("spreadHeart");
+      h.innerHTML = "💗";
+
+      h.style.left = (Math.random() * 100) + "%";
+      h.style.top = (Math.random() * 100) + "%";
+      h.style.animationDelay = (Math.random() * 0.3) + "s";
+
+      container.appendChild(h);
+    }
+
+    count *= 2;
+    if (count > 40) clearInterval(interval);
+
+  }, 200);
 }
 
 /* Arkaplan kalpleri */
