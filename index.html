@@ -18,6 +18,7 @@ body {
 .section { display: none; padding: 60px 20px; }
 .active { display: block; }
 
+/* Buton */
 .btn {
   padding: 12px 28px;
   background: #ff7bbf;
@@ -32,6 +33,7 @@ body {
 }
 .btn:hover { transform: scale(1.05); background: #ff92cc; }
 
+/* Intro yazıları */
 .start-text {
   font-size: 1.5rem;
   text-align: center;
@@ -41,19 +43,21 @@ body {
 }
 @keyframes fadeIn { to { opacity: 1; } }
 
+/* Ok işareti */
 .down-arrow {
   font-size: 2.2rem;
   text-align: center;
-  margin-top: 20px;
-  opacity: 0.7;
-  animation: arrowBounce 1.6s infinite;
+  opacity: 0;
+  animation: fadeArrow 2s forwards, arrowBounce 1.6s infinite;
   color: #ff7bbf;
 }
+@keyframes fadeArrow { to { opacity: 0.7; } }
 @keyframes arrowBounce {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(10px); }
 }
 
+/* Scroll bölümü */
 .scroll-section {
   max-width: 800px;
   margin: 0 auto;
@@ -66,7 +70,7 @@ body {
   font-size: 1.65rem;
 }
 
-/* Kalpler */
+/* Arkaplan kalpler */
 .heart-bg {
   position: fixed;
   width: 100%; height: 100%;
@@ -82,11 +86,11 @@ body {
   opacity: 0.8;
 }
 @keyframes floatUp {
-  0% { transform: translateY(50px); }
-  100% { transform: translateY(-300px); }
+  0% { transform: translateY(50px); opacity: .8; }
+  100% { transform: translateY(-300px); opacity: 0; }
 }
 
-/* Ask screen */
+/* Love ekranı */
 .love-container {
   text-align: center;
   margin-top: 100px;
@@ -111,26 +115,16 @@ button:hover { background: #ff92cc; }
   font-weight: 600;
 }
 
-/* Düşen kalpler */
-.fall {
-  animation: fallDown 1.5s forwards;
-}
-@keyframes fallDown {
-  0% { transform: translateY(-300px); }
-  90% { transform: translateY(80vh); }
-  100% { transform: translateY(75vh) scale(1.1); }
-}
-
-/* Çiçek Veren Kedi (SVG) */
-.kitty {
-  width: 180px;
-  margin: 30px auto 0;
-  display: none;
-  animation: pop 0.6s ease forwards;
-}
-@keyframes pop {
-  0% { transform: scale(0.3) translateY(40px); opacity: 0; }
-  100% { transform: scale(1) translateY(0); opacity: 1; }
+/* Evet sonrası ekran kapanışı */
+.close-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #ffeef7;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  z-index: 9999;
 }
 </style>
 </head>
@@ -139,18 +133,26 @@ button:hover { background: #ff92cc; }
 
 <div class="heart-bg" id="heartBg"></div>
 
+<div class="close-screen" id="closeScreen"></div>
+
 <!-- INTRO -->
 <div id="intro" class="section active">
-  <div class="start-text" style="animation-delay:0s;">Gerçekten sana normal bir anahtarlık vereceğimi mi sandın?</div>
 
-  <div class="start-text" style="animation-delay:1.6s;">
+  <div class="start-text" style="animation-delay:0s;">
+    Gerçekten sana normal bir anahtarlık vereceğimi mi sandın?
+  </div>
+
+  <div class="start-text" style="animation-delay:1.5s;">
     Bu... ne zaman beni özlersen açıp<br>
     sana olan sevgimi hatırlayacağın küçük bir yer.
   </div>
 
-  <div class="down-arrow" style="animation-delay:3.5s;">↓</div>
+  <!-- OK BURADA – 2. CÜMLEYLE BİRLİKTE -->
+  <div class="down-arrow" style="animation-delay:1.5s;">↓</div>
 
-  <div class="start-text" style="animation-delay:4.2s;">Bunu görmeye hazır mısın?</div>
+  <div class="start-text" style="animation-delay:3.3s;">
+    Bunu görmeye hazır mısın?
+  </div>
 
   <div style="text-align:center; margin-top:40px;">
     <span class="btn" onclick="go(2)">Evet</span>
@@ -173,13 +175,13 @@ button:hover { background: #ff92cc; }
     <h2>• Senin Hakkında En Sevdiğim Şeyler</h2>
     <p>
       En sevdiğim şey dış görünüşün ya da karakterin değil…  
-      <strong>bende bıraktığın his.</strong>  
-      İçimi rahatlatan, yumuşatan o şey.
+      <strong>bende bıraktığın his.</strong>
     </p>
 
     <h2>• Seni Sevme Şeklim</h2>
     <p>
-      Bazen bir şey anlatıyorsun, dalıyorum… çünkü o anı izlemek bile güzel.  
+      Bazen bir şey anlatıyorsun, dalıyorum…  
+      çünkü o anı izlemek bile güzel.  
       Bazen sinirleniyorsun, o bile tatlı geliyor.  
       Bazen sadece varsın ve bu bile yetiyor.
     </p>
@@ -218,11 +220,6 @@ button:hover { background: #ff92cc; }
     <button id="noBtn" onmouseover="escapeBtn()">Hayır</button>
 
     <div id="msg">Ben de seni seviyorum canım aşkım benim. 💗</div>
-
-    <!-- Çiçek Veren Kedi SVG -->
-    <div id="kitty" class="kitty">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Noto_Emoji_v2.034_1f63b.svg/240px-Noto_Emoji_v2.034_1f63b.svg.png" width="140">
-    </div>
   </div>
 </div>
 
@@ -240,16 +237,24 @@ function escapeBtn() {
 
 function yes() {
   document.getElementById("msg").style.display = "block";
-  document.getElementById("kitty").style.display = "block";
 
-  // Kalpleri düşür
-  document.querySelectorAll(".heart").forEach(h => h.classList.add("fall"));
+  // Kapanış animasyonu
+  setTimeout(() => {
+    const screen = document.getElementById("closeScreen");
+    screen.style.opacity = "1";
+
+    // yeniden başlat
+    setTimeout(() => {
+      location.reload();
+    }, 1600);
+
+  }, 700);
 }
 
-// Kalpleri yukarı biriktir
+// Kalp üretimi
 function createHearts(){
   const bg = document.getElementById("heartBg");
-  for(let i=0; i<40; i++){
+  for(let i=0; i<35; i++){
     let h = document.createElement("div");
     h.classList.add("heart");
     h.innerHTML = "❤️";
@@ -263,4 +268,4 @@ createHearts();
 </script>
 
 </body>
-</html> 
+</html>
